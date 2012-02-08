@@ -4,38 +4,40 @@ use warnings;
 use IO::File;
 
 our $script_root;
-our $targets = [];
 
 sub compile {
   my ($self, $params) = @_;
   $script_root = $params->{script_root};
   $script_root =~ s/\/*$//g;
-  $self->_create_file_list($params->{namespaces});
+  my $files = $self->_create_file_list($params->{namespaces});
+
   my $script;
-  for my $path (@$targets) {
+  for my $path (@$files) {
     my @lines = $self->_read($path);
     $script .= join '', @lines;
   }
   return {
-    targets => $targets,
-    script  => $script,
+    files  => $files,
+    script => $script,
   };
 }
 
 sub _create_file_list {
-  my ($self, $namespaces) = @_;
+  my ($self, $namespaces, $files) = @_;
+  $files = [] unless defined $files;
   for my $namespace (@{$namespaces}) {
     my $path = $self->_namespace_to_path($namespace);
     if (-e $path) {
-      next if (grep {$_ eq $path} @{$targets});
-      push @{$targets}, $path;
+      next if (grep {$_ eq $path} @{$files});
+      push @{$files}, $path;
       my @lines = $self->_read($path);
       my $used_namespaces = $self->_parse(\@lines);
-      $self->_create_file_list($used_namespaces);
+      $self->_create_file_list($used_namespaces, $files);
     } else {
       die("$path is not found");
     }
   }
+  return $files;
 }
 
 sub _parse {
