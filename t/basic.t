@@ -10,6 +10,7 @@ $result = JavaScript::Namespace::Compiler->compile({
   script_root => $script_root,
   namespaces => [
     'com.kaihatsubu.hoge',
+    'com.kaihatsubu.fuga',
   ],
 });
 
@@ -19,6 +20,7 @@ is_deeply($result->{files}, [
   './t/script/com/kaihatsubu/hoge.js',
   './t/script/com/kaihatsubu/foo/bar.js',
   './t/script/com/kaihatsubu/foo/baz.js',
+  './t/script/com/kaihatsubu/fuga.js',
 ]);
 
 $result = JavaScript::Namespace::Compiler->compile({
