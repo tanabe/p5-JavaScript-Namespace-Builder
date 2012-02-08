@@ -55,7 +55,9 @@ sub _read {
   my ($self, $path) = @_;
   my $file_handler = IO::File->new;
   $file_handler->open($path, 'r');
-  return $file_handler->getlines();
+  my @lines = $file_handler->getlines();
+  $file_handler->close();
+  return @lines;
 }
 
 1;
