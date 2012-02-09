@@ -1,12 +1,12 @@
-# JavaScript::Namespace::Compiler
+# JavaScript::Namespace::Builder
 ----
 
 ## description
-Namespace.js compiler.
+Namespace.js builder.
 auto resolve dependencies.
 
 ## usage
-    my $result = JavaScript::Namespace::Compiler->compile({
+    my $result = JavaScript::Namespace::Builder->build({
       script_root => '/script',
       namespaces => [
         'com.kaihatsubu.hoge',

@@ -1,12 +1,12 @@
 use strict;
 use warnings;
 use Test::More;
-use JavaScript::Namespace::Compiler;
+use JavaScript::Namespace::Builder;
 
 my $script_root = './t/script';
 my $result;
 
-$result = JavaScript::Namespace::Compiler->compile({
+$result = JavaScript::Namespace::Builder->build({
   script_root => $script_root,
   namespaces => [
     'com.kaihatsubu.hoge',
@@ -23,7 +23,7 @@ is_deeply($result->{files}, [
   './t/script/com/kaihatsubu/fuga.js',
 ]);
 
-$result = JavaScript::Namespace::Compiler->compile({
+$result = JavaScript::Namespace::Builder->build({
   script_root => $script_root,
   namespaces => [
     'com.kaihatsubu.foo.bar',
@@ -36,4 +36,4 @@ is_deeply($result->{files}, [
   './t/script/com/kaihatsubu/foo/bar.js',
 ]);
 
-::done_testing;
+done_testing;

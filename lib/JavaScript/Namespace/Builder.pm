@@ -1,11 +1,11 @@
-package JavaScript::Namespace::Compiler;
+package JavaScript::Namespace::Builder;
 use strict;
 use warnings;
 use IO::File;
 
 our $script_root;
 
-sub compile {
+sub build {
   my ($self, $params) = @_;
   $script_root = $params->{script_root};
   $script_root =~ s/\/*$//g;
