@@ -14,8 +14,8 @@ auto resolve dependencies.
       ],
     });
 
+$result is
 
-    $result is
     {
       'script' => 'Namespace('com.kaihatsubu.hoge')
       .use('com.kaihatsubu.foo.bar *')
