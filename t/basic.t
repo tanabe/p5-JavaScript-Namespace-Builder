@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More;
+use Test::More 'no_plan';
 use JavaScript::Namespace::Builder;
 
 my $script_root = './t/script';
@@ -36,4 +36,3 @@ is_deeply($result->{files}, [
   './t/script/com/kaihatsubu/foo/bar.js',
 ]);
 
-done_testing;
